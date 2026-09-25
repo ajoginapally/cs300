@@ -1,0 +1,30 @@
+Reflection Questions
+====
+1. Describe your experience/confidence in completing this project in 2 to 3 sentences.
+   I'd say overall, I was pretty confident in the topics covered in the project, but at the same with the new topic of oversized arrays, it made me really think of how to approach it. Additionally, as I haven't worked 
+   java in awhile it reinforced a lot of concepts that I previously knew, and helped reinforce my skills with loops and arrays. 
+
+2. As you were working on the program, did you find yourself frequently stuck and not knowing how to
+   continue? Did you look up a solution or get significant help from someone in order to continue or
+   complete the project?  (If so, you may not be ready for CS 300.)
+   To be honest, the methods themselves seemed pretty simple and I didn't really need to think super hard about it. Although, working with a tester class is something I've really done before but I didn't
+   need any external support or AI use. 
+
+3. What was the most challenging part of writing this program and what did you do to overcome that 
+   challenge?
+   
+   Since writing tester methods is something new to me, I had to really consider how to do it. I had to question how to make it easiest for myself while also ensuring that it will pass all
+   the tests in the assignment, and I overcame it through thinking of different ways I might be tested and writing that in the tester. 
+
+4. Did you try the test-driven development approach? If so, what did you think? If not, why did you 
+   choose not to? 
+   
+   I didn't because it's something I'm not super familiar with, so I stuck to an approach of writing the methods in the intended class first. However, I recognize now that it is extremely helpful to write 
+   the tester beforehand because it forces you to appraoch the problem differently and also think about edge cases. 
+
+5. Describe a debugging technique you used to identify and fix a problem in your code.
+
+   I used print-outs along with going line by line in my code to ensure that I was actually doing the right thing. 
+
+====
+***Remember to submit this file to Gradescope along with your Java code!***
