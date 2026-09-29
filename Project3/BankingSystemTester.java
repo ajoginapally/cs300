@@ -1,10 +1,15 @@
-//TODO file header comment
+/*
+ * Author: Arnav Joginapally
+ * Course: CS 300, Fall 2026
+ * Assignment: Banking System, Program 3
+ * Email: joginapally@wisc.edu
+ * Citations: None
+ */
 
 /** 
  * This contains test cases to comprehensively test the BankAccount and BankingSystem 
  * classes.
- * @author Jim Williams and Hobbes
- * @author YOUR NAME ONCE YOU CONTRIBUTE
+ * @author Arnav Joginapally\
  */
 public class BankingSystemTester {
 
