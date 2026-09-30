@@ -20,13 +20,14 @@ public class BankAccount {
    * @param accountNumber Bank Account num
    * @param accountHolderName Account holder's name
    * @param initialBalance Initial balance for the account
-   * @throws InvalidAccountException if the account number is null or not eight digits
-   * @throws IllegalArgumentException if the name is null or blank, or the balance is negative
    */
-  public BankAccount(String accountNumber, String accountHolderName, double initialBalance)
-      throws InvalidAccountException, IllegalArgumentException {
+  public BankAccount(String accountNumber, String accountHolderName, double initialBalance) {
     // Validate accountNumber
-    if (accountNumber == null || !accountNumber.matches("\\d{8}")) {
+    if (accountNumber == null) {
+      throw new InvalidAccountException("Account number must be exactly 8 digits");
+    }
+
+    if (!accountNumber.chars().allMatch(Character::isDigit)) {
       throw new InvalidAccountException("Account number must be exactly 8 digits");
     }
 
@@ -49,9 +50,8 @@ public class BankAccount {
   /**
    * This Method deposits the specified amount into the bank account.
    * @param amount Amount to deposit
-   * @throws IllegalArgumentException if the deposit amount is negative
    */
-  public void deposit(double amount) throws IllegalArgumentException {
+  public void deposit(double amount) {
     // Reject negative amounts before changing the balance.
     if (amount < 0) {
       throw new IllegalArgumentException("Deposit amount cannot be negative");
@@ -64,10 +64,9 @@ public class BankAccount {
   /**
    * This Method withdraws the specified amount from the bank account.
    * @param amount Amount to withdraw
-   * @throws IllegalArgumentException if the withdrawal amount is negative
    * @throws InsufficientFundsException if the amount exceeds the balance
    */
-  public void withdraw(double amount) throws IllegalArgumentException, InsufficientFundsException {
+  public void withdraw(double amount) throws InsufficientFundsException {
     // Reject negative amounts before changing the balance.
     if (amount < 0) {
       throw new IllegalArgumentException("Withdrawal amount cannot be negative");

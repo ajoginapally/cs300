@@ -27,11 +27,8 @@ public class BankingSystem {
    * @param accountNumber The account number for the new bank account
    * @param name The name of the account holder
    * @param initialDeposit The initial deposit amount for the new bank account
-   * @throws InvalidAccountException if the account number is invalid or already exists
-   * @throws IllegalArgumentException if the name is null or blank, or the deposit is negative
    */
-  public void createAccount(String accountNumber, String name, double initialDeposit)
-      throws InvalidAccountException, IllegalArgumentException {
+  public void createAccount(String accountNumber, String name, double initialDeposit) {
     // Examine each stored account.
     for (BankAccount account : accounts) {
       if (account.getAccountNumber().equals(accountNumber)) {
@@ -53,9 +50,8 @@ public class BankingSystem {
    *     the account is not found.
    * @param accountNumber The account number of the bank account to find
    * @return The bank account with the specified account number
-   * @throws InvalidAccountException if the account cannot be found
    */
-  public BankAccount findAccount(String accountNumber) throws InvalidAccountException {
+  public BankAccount findAccount(String accountNumber) {
     // Examine each stored account.
     for (BankAccount account : accounts) {
       if (account.getAccountNumber().equals(accountNumber)) {
@@ -70,12 +66,10 @@ public class BankingSystem {
    * @param fromAccountNum The account number of the account to transfer money from
    * @param toAccountNum The account number of the account to transfer money to
    * @param amount The amount of money to transfer
-   * @throws InvalidAccountException if either account cannot be found
-   * @throws IllegalArgumentException if the accounts match or the amount is negative
    * @throws InsufficientFundsException if the source account has insufficient funds
    */
   public void transferMoney(String fromAccountNum, String toAccountNum, double amount)
-      throws InvalidAccountException, IllegalArgumentException, InsufficientFundsException {
+      throws InsufficientFundsException {
     // Perform the operation and propagate account errors.
     try {
       if (fromAccountNum.equals(toAccountNum)) {
@@ -97,9 +91,8 @@ public class BankingSystem {
    * Displays the information of the bank account with the specified account number. Throws an
    *     exception if the account is not found.
    * @param accountNumber The account number of the bank account to display
-   * @throws InvalidAccountException if the account cannot be found
    */
-  public void displayAccountInfo(String accountNumber) throws InvalidAccountException {
+  public void displayAccountInfo(String accountNumber) {
     // Perform the operation and propagate account errors.
     try {
       BankAccount account = findAccount(accountNumber);
