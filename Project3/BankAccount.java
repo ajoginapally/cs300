@@ -1,14 +1,14 @@
 /*
  * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
  * Course: CS 300, Fall 2026
  * Assignment: Banking System, Program 3
- * Email: joginapally@wisc.edu
- * Citations: None
+ * Citations: none
  */
 
-
 /**
- * Represents a bank account with basic operations such as deposit, withdraw, and balance information
+ * Represents a bank account with basic operations such as deposit, withdraw, and balance
+ *     information
  */
 public class BankAccount {
   private String accountNumber;
@@ -17,19 +17,14 @@ public class BankAccount {
 
   /**
    * BankAccount Constructor
-   * @param accountNumber - Bank Account num
-   * @param accountHolderName - Account holder's name
-   * @param initialBalance - Initial balance for the account
-   * @throws InvalidAccountException
-   * @throws IllegalArgumentException
+   * @param accountNumber Bank Account num
+   * @param accountHolderName Account holder's name
+   * @param initialBalance Initial balance for the account
+   * @throws InvalidAccountException if the account number is null or not eight digits
+   * @throws IllegalArgumentException if the name is null or blank, or the balance is negative
    */
-  public BankAccount(
-    String accountNumber,
-    String accountHolderName,
-    double initialBalance
-  ) throws InvalidAccountException, IllegalArgumentException {
-   
-
+  public BankAccount(String accountNumber, String accountHolderName, double initialBalance)
+      throws InvalidAccountException, IllegalArgumentException {
     // Validate accountNumber
     if (accountNumber == null || !accountNumber.matches("\\d{8}")) {
       throw new InvalidAccountException("Account number must be exactly 8 digits");
@@ -45,7 +40,7 @@ public class BankAccount {
       throw new IllegalArgumentException("Initial balance cannot be negative");
     }
 
-    //setting values
+    // Initialize the account fields.
     this.accountNumber = accountNumber;
     this.accountHolderName = accountHolderName;
     this.balance = initialBalance;
@@ -53,29 +48,37 @@ public class BankAccount {
 
   /**
    * This Method deposits the specified amount into the bank account.
-   * @param amount - Amount to deposit
-   * @throws IllegalArgumentException
+   * @param amount Amount to deposit
+   * @throws IllegalArgumentException if the deposit amount is negative
    */
   public void deposit(double amount) throws IllegalArgumentException {
+    // Reject negative amounts before changing the balance.
     if (amount < 0) {
       throw new IllegalArgumentException("Deposit amount cannot be negative");
     }
+
+    // Apply the deposit.
     balance += amount;
   }
 
   /**
    * This Method withdraws the specified amount from the bank account.
-   * @param amount - Amount to withdraw
-   * @throws IllegalArgumentException
-   * @throws InsufficientFundsException
+   * @param amount Amount to withdraw
+   * @throws IllegalArgumentException if the withdrawal amount is negative
+   * @throws InsufficientFundsException if the amount exceeds the balance
    */
   public void withdraw(double amount) throws IllegalArgumentException, InsufficientFundsException {
+    // Reject negative amounts before changing the balance.
     if (amount < 0) {
       throw new IllegalArgumentException("Withdrawal amount cannot be negative");
     }
+
+    // Ensure the account has enough funds.
     if (amount > balance) {
       throw new InsufficientFundsException("Insufficient funds for withdrawal");
     }
+
+    // Apply the withdrawal.
     balance -= amount;
   }
 
@@ -103,17 +106,13 @@ public class BankAccount {
     return accountHolderName;
   }
 
-  /**  
+  /**
    * Returns a string representation of the bank account.
-   * @Override
+   * @return the account number, holder name, and formatted balance
    * @see java.lang.Object#toString()
    */
   public String toString() {
-    return String.format(
-      "Account: %s, Holder: %s, Balance: $%.2f",
-      accountNumber,
-      accountHolderName,
-      balance
-    );
+    return String.format("Account: %s, Holder: %s, Balance: $%.2f",
+        accountNumber, accountHolderName, balance);
   }
 }

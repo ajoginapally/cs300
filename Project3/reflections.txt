@@ -1,10 +1,22 @@
 Reflection Questions
 
 1. Describe your experience/confidence in completing this project in 2 to 3 sentences.
-   TODO
+   Even though exceptions at first was really confusing, the zybooks material really helped me understand it
+   and apply it in the projec. For instance, handling and catching exceptions has become way easier
+   and makes way more sense, and within this project I definitely think my confidence
+   in these topics has deepened. 
+
 2. How did exception handling improve your program's robustness?
-   TODO
+   It made sure that there were no test-cases such that the program would break. It also ensured that no matter
+   what user input was inputted, the program could handle all the edge cases in a way thats easy for a user to
+   work with and understand.
+
 3. This program uses custom exceptions. Did you think this was a good design choice? Why or why not?
-   TODO
+   Yes, because instead of using Java developed ones, we had our own implementations that were oriented towards 
+   the BankingSystem ideas. Also, normal exceptions most likely would not have worked for our use case, so 
+   custom exceptions were definitely a good design choice. 
+
 4. Did you try the test-driven development approach? If so, what did you think? If not, why did you choose not to?
-   TODO
+   Once again, I had a normal approach: working from BankAccount to BankingSystem, and fianlly to the tester. 
+   I think I chose to take a normal appraoch just because it seemed easier in my head to do, and is what I am
+   accustomed to doing. In the future though, I will definitely consider doing a test-driven development. 
