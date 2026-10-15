@@ -41,14 +41,33 @@ public class GradeBookTester {
 
   public static boolean testAddGradeValidation() {
     System.out.println("Testing addGrade validation...");
+    Student student = new Student("Arnav Joginapally", "001");
+    
+    try {
+      student.addGrade(85.0);
+      student.addGrade(90.0);
+    } catch (InvalidGradeException e) {
+      return false;
+    }
+    
 
-    // TODO: Test adding valid grades
+    
+    try {
+      student.addGrade(-5.0);
+      return false; // Should not reach here
+    } catch (InvalidGradeException e) {
+      // Expected exception
+    }
 
-    // TODO: Test invalid grade - negative
+    
+    try {
+      student.addGrade(105.0);
+      return false; // Should not reach here
+    } catch (InvalidGradeException e) {
+      // Expected exception
+    }
 
-    // TODO: Test invalid grade - over 100
-
-    return false; // TODO: return return true if all tests pass, false otherwise
+    return true; 
   }
 
   // ---- PROVIDED 
@@ -123,8 +142,22 @@ public class GradeBookTester {
     System.out.println("Testing student add/find operations...");
 
     // TODO: Create GradeBook and add 2 students successfully
+    try {
+      GradeBook gradeBook = new GradeBook();
+      Student student1 = new Student("Arnav", "001");
+      Student student2 = new Student("Jog", "002");
+
+      gradeBook.addStudent(student1);
+      gradeBook.addStudent(student2);
+
+    } catch (Exception e) {
+      return false;
+    }
 
     // TODO: Test finding existing student by ID
+    try {
+      Student foundStudent = 
+    }
 
     // TODO: Test DuplicateStudentException when adding duplicate ID
 
