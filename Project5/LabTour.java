@@ -62,9 +62,12 @@ public class LabTour implements SafetyCheckable {
    */
   @Override
   public int countHumanSafetyViolations() {
-    // TODO: complete this method
-
-    return 0;
+    
+    int totalHumans = this.visitors;
+    for (Experiment experiment : this.activeExperiments) {
+      totalHumans += experiment.getStaff();
+    }
+    return (totalHumans > LAB_CAPACITY) ? 1 : 0;
   }
 
   /**

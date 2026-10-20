@@ -24,8 +24,19 @@ public class Habitat implements SafetyCheckable {
    * @throws IllegalArgumentException if validation rules are violated.
    */
   public Habitat(String name, double area, int parkRangers) {
-    // TODO: Implement validation for name, area, and parkRangers.
-    // TODO: Initialize fields and instantiate the dinosaur collection.
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("Habitat name cannot be null or blank.");
+    }
+    if (area <= 0) {
+      throw new IllegalArgumentException("Habitat area must be greater than 0.");
+    }
+    if (parkRangers < 0) {
+      throw new IllegalArgumentException("Number of park rangers cannot be negative.");
+    }
+    this.name = name;
+    this.area = area;
+    this.parkRangers = parkRangers;
+    this.dinosaurs = new ArrayList<>();
   }
 
   // --- Getters ---
@@ -35,8 +46,8 @@ public class Habitat implements SafetyCheckable {
    * @return The name of the habitat.
    */
   public String getName() {
-    // TODO: Return the habitat name
-    return null;
+    
+    return this.name;
   }
 
   /**
@@ -44,8 +55,7 @@ public class Habitat implements SafetyCheckable {
    * @return The total area of the habitat.
    */
   public double getArea() {
-    // TODO: Return the area
-    return 0.0;
+    return this.area;
   }
 
   /**
@@ -53,8 +63,7 @@ public class Habitat implements SafetyCheckable {
    * @return The number of rangers assigned to this habitat.
    */
   public int getParkRangers() {
-    // TODO: Return the ranger count
-    return 0;
+    return this.parkRangers;
   }
 
   /**
@@ -62,9 +71,7 @@ public class Habitat implements SafetyCheckable {
    * @return A new ArrayList containing the resident dinosaurs.
    */
   public ArrayList<Dinosaur> getDinosaurs() {
-    // TODO: Return a defensive copy of the dinosaur list to prevent external
-    // modification.
-    return null;
+    return new ArrayList<>(this.dinosaurs);
   }
 
   /**
@@ -73,7 +80,10 @@ public class Habitat implements SafetyCheckable {
    * @throws IllegalArgumentException if the dinosaur is null.
    */
   public void addDinosaur(Dinosaur dinosaur) {
-    // TODO: Validate input and add to the internal list.
+    if (dinosaur == null) {
+      throw new IllegalArgumentException("Dinosaur cannot be null.");
+    }
+    this.dinosaurs.add(dinosaur);
   }
 
   /**
@@ -84,11 +94,15 @@ public class Habitat implements SafetyCheckable {
    * @throws DinoNotFoundException if no dinosaur with that ID exists in this habitat.
    */
   public Dinosaur removeDinosaur(String dinoId) throws DinoNotFoundException {
-    // TODO: Validate dinoId.
-    // TODO: Search the list for the dinosaur with the matching ID.
-    // TODO: If found, remove it from the list and return it.
-    // TODO: If the loop finishes without finding it, throw a DinoNotFoundException.
-    return null;
+    if (dinoId == null || dinoId.isBlank()) {
+      throw new IllegalArgumentException("Dinosaur ID cannot be null or blank.");
+    }
+    for (int i = 0; i < this.dinosaurs.size(); i++) {
+      if (this.dinosaurs.get(i).getId().equals(dinoId)) {
+        return this.dinosaurs.remove(i);
+      }
+    }
+    throw new DinoNotFoundException("No dinosaur with ID " + dinoId);
   }
 
   /**
@@ -102,8 +116,14 @@ public class Habitat implements SafetyCheckable {
    */
   @Override
   public int countHumanSafetyViolations() {
-    // TODO: Implement the safety math logic described in the Javadoc above.
-    return 0;
+    int violations = 0;
+    if (this.area > this.parkRangers * 10) {
+      violations++;
+    }
+    if (this.dinosaurs.size() > this.parkRangers) {
+      violations++;
+    }
+    return violations;
   }
 
   /**
@@ -117,13 +137,28 @@ public class Habitat implements SafetyCheckable {
    */
   @Override
   public int countDinoSafetyViolations() {
-    // TODO: Calculate total area required by all residents and compare to habitat
-    // area.
-
+    int violations = 0;
+    
+    int totalAreaRequired = 0;
+    for (Dinosaur dinosaur : this.dinosaurs) {
+      totalAreaRequired += dinosaur.getPreferredArea();
+    }
+    if (totalAreaRequired > this.area) {
+      violations++;
+    }
     // TODO: Check if any resident is incompatible with any
     // other resident using the canCoexistWith() method.
+    for (int i = 0; i < this.dinosaurs.size(); i++) {
+      for (int j = i + 1; j < this.dinosaurs.size(); j++) {
+        Dinosaur dino1 = this.dinosaurs.get(i);
+        Dinosaur dino2 = this.dinosaurs.get(j);
+        if (!dino1.canCoexistWith(dino2)) {
+          violations++;
+        }
+      }
+    }
 
-    return 0;
+    return violations;
   }
 
   /**

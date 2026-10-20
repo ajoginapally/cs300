@@ -16,8 +16,13 @@ public class Experiment {
    * @throws IllegalArgumentException if staff is < 1
    */
   public Experiment(String description, int staff) {
-    // TODO: Implement validation logic
-    // TODO: Initialize fields with provided parameters
+    
+    if (staff <= 0) {
+      throw new IllegalArgumentException("Staff count must be at least 1");
+    }
+    
+    this.description = description;
+    this.staff = staff;
   }
 
   /**
@@ -26,7 +31,7 @@ public class Experiment {
    */
   public String getDescription() {
     // TODO: Return the description field
-    return null;
+    return description;
   }
 
   /**
@@ -35,7 +40,7 @@ public class Experiment {
    */
   public int getStaff() {
     // TODO: Return the staff field
-    return 0;
+    return staff;
   }
 
   /**
@@ -43,7 +48,7 @@ public class Experiment {
    * @param description The new description to set.
    */
   public void setDescription(String description) {
-    // TODO: Update the description field
+    this.description = description;
   }
 
   /**
@@ -51,7 +56,10 @@ public class Experiment {
    * @param staff The new staff count to set.
    */
   public void setStaff(int staff) {
-    // TODO: Update the staff field
+    if (staff <= 0) {
+      throw new IllegalArgumentException("Staff count must be at least 1");
+    }
+    this.staff = staff;
   }
 
   /**

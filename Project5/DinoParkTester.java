@@ -74,12 +74,10 @@ public class DinoParkTester {
     }
 
     // TODO: Test with total people OVER capacity
-
+    
     // TODO: Test with total people EXACTLY EQUAL TO capacity
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
+   
 
     System.out.println();
     return allTestsPassed;

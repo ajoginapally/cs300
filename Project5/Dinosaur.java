@@ -32,8 +32,25 @@ public abstract class Dinosaur {
    * or if preferredArea is less than or equal to zero.
    */
   protected Dinosaur(String id, String name, int age, FoodType foodType, double preferredArea) {
-    // TODO: Implement validation logic
-    // TODO: Initialize fields
+    
+    if (id == null || id.isBlank()) {
+      throw new IllegalArgumentException("ID cannot be null or blank");
+    }
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("Name cannot be null or blank");
+    }
+    if (age < 0) {
+      throw new IllegalArgumentException("Age cannot be negative");
+    }
+    if (preferredArea <= 0) {
+      throw new IllegalArgumentException("Preferred area must be greater than 0");
+    }
+    
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.foodType = foodType;
+    this.preferredArea = preferredArea;
   }
 
   /**
@@ -58,8 +75,7 @@ public abstract class Dinosaur {
    * @return The ID string.
    */
   public String getId() {
-    // TODO: Return the current ID field
-    return null;
+    return this.id;
   }
 
   /**
@@ -67,8 +83,7 @@ public abstract class Dinosaur {
    * @return The dinosaur's name.
    */
   public String getName() {
-    // TODO: Return the current name field
-    return null;
+    return this.name;
   }
 
   /**
@@ -76,8 +91,7 @@ public abstract class Dinosaur {
    * @return The age value.
    */
   public int getAge() {
-    // TODO: Return the current age field
-    return 0;
+    return this.age;
   }
 
   /**
@@ -85,8 +99,7 @@ public abstract class Dinosaur {
    * @return The FoodType enum value.
    */
   public FoodType getFoodType() {
-    // TODO: Return the current foodType field
-    return null;
+    return this.foodType;
   }
 
   /**
@@ -94,8 +107,7 @@ public abstract class Dinosaur {
    * @return The preferred area in square meters.
    */
   public double getPreferredArea() {
-    // TODO: Return the current preferredArea field
-    return 0.0;
+    return this.preferredArea;
   }
 
   /**
