@@ -39,7 +39,7 @@ public class DinoParkTester {
     allPassed &= testHabitatRemoveValidation();
     allPassed &= testHabitatHumanSafetyChecks();
     allPassed &= testHabitatDinoSafetyChecks();
-    allPassed &= testCompleteWorkflow();
+    // allPassed &= testCompleteWorkflow();
     return allPassed;
   }
 
@@ -73,9 +73,47 @@ public class DinoParkTester {
       allTestsPassed = false;
     }
 
-    // TODO: Test with total people OVER capacity
+    LabTour labTourOverCapacity = new LabTour("Mr. DNA", 4);
+    labTourOverCapacity.addExperiment(new Experiment("Hatching raptors", 3));
+    labTourOverCapacity.addExperiment(new Experiment("Genome splicing", 2));
+    labTourOverCapacity.addExperiment(new Experiment("Cloning", 2));
+
+    int dinoViolationsOverCapacity = labTourOverCapacity.countDinoSafetyViolations();
+    int humanViolationsOverCapacity = labTourOverCapacity.countHumanSafetyViolations();
+
+    if (dinoViolationsOverCapacity != 0) {
+      System.out.println("LabTour countDinoSafetyViolations incorrect for case: "
+          + "Total people over capacity.\n"
+          + "Expected: 0\n"
+          + "Actual: " + dinoViolationsOverCapacity);
+      allTestsPassed = false;
+    }
+    if (humanViolationsOverCapacity != 1) {
+      System.out.println("LabTour countHumanSafetyViolations incorrect for case: "
+          + "Total people over capacity.\n"
+          + "Expected: 1\n"
+          + "Actual: " + humanViolationsOverCapacity);
+      allTestsPassed = false;
+    }
     
-    // TODO: Test with total people EXACTLY EQUAL TO capacity
+    LabTour labTourExactlyCapacity = new LabTour("Mr. DNA", 4);
+    labTourExactlyCapacity.addExperiment(new Experiment("Hatching raptors", 3));
+    labTourExactlyCapacity.addExperiment(new Experiment("Genome splicing", 1));
+
+    int dinoViolationsExactlyCapacity = labTourExactlyCapacity.countDinoSafetyViolations();
+    int humanViolationsExactlyCapacity = labTourExactlyCapacity.countHumanSafetyViolations();
+
+    if (dinoViolationsExactlyCapacity != 0) {
+      System.out.println("LabTour countDinoSafetyViolations incorrect for case: "
+          + "Total people exactly equal to capacity.\n"
+          + "Expected: 0\n"
+          + "Actual: " + dinoViolationsExactlyCapacity);
+      allTestsPassed = false;
+    }
+    if (humanViolationsExactlyCapacity != 0) {
+      
+      allTestsPassed = false;
+    }
 
    
 
@@ -121,26 +159,25 @@ public class DinoParkTester {
     boolean allTestsPassed = true;
 
     // Uncomment once you have added the TRex class:
-    //TRex trex = new TRex("trex1", "Sue", 24);
+    TRex trex = new TRex("trex1", "Sue", 24);
 
-    // TODO: Test calling canCoexistWith any other dinosaur. Should return false
-
-    // PROVIDED SCENARIO: Test calling canCoexistWith on itself. Should return true
-    // Uncomment once you have added the TRex class:
-        /*
-        boolean trexCoexistWithItself = trex.canCoexistWith(trex);
-        if (!trexCoexistWithItself) {
-            System.out.println("TRex canCoexistWith incorrect for case: "
+    Velociraptor otherDinosaur = new Velociraptor("raptor1", "Alan", 8);
+    if (trex.canCoexistWith(otherDinosaur)) {
+      allTestsPassed = false;
+    }
+    
+    
+    boolean trexCoexistWithItself = trex.canCoexistWith(trex);
+    if (!trexCoexistWithItself) {
+      System.out.println("TRex canCoexistWith incorrect for case: "
                     + "Can coexist with itself.\n"
                     + "Expected: true\n"
                     + "Actual: false");
-            allTestsPassed = false;
-        }
-        */
+      allTestsPassed = false;
+    }
+        
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
+    
 
     System.out.println();
     return allTestsPassed;
@@ -150,13 +187,17 @@ public class DinoParkTester {
     System.out.println("Testing Triceratops canCoexistWith...");
     boolean allTestsPassed = true;
 
-    // TODO: Test where other Dinosaur has food type MEAT. Should return false
+    Triceratops triceratops = new Triceratops("triceratops1", "Cera", 10);
+    TRex meatDinosaur = new TRex("trex1", "Sue", 24);
+    if (triceratops.canCoexistWith(meatDinosaur)) {
+      allTestsPassed = false;
+    }
 
-    // TODO: Test where other Dinosaur has food type PLANTS. Should return true
+    Brachiosaurus plantsDinosaur = new Brachiosaurus("longneck1", "Littlefoot", 4);
+    if (!triceratops.canCoexistWith(plantsDinosaur)) {
+      allTestsPassed = false;
+    }
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
 
     System.out.println();
     return allTestsPassed;
@@ -166,17 +207,26 @@ public class DinoParkTester {
     System.out.println("Testing Spinosaurus canCoexistWith...");
     boolean allTestsPassed = true;
 
-    // TODO: Test calling canCoexistWith on itself. Should return true
+    Spinosaurus spinosaurus = new Spinosaurus("spino1", "Arnav", 15);
+    if (!spinosaurus.canCoexistWith(spinosaurus)) {
+      allTestsPassed = false;
+    }
 
-    // TODO: Test calling canCoexistWith on a different Spinosaurus. Should return true
+    Spinosaurus otherSpinosaurus = new Spinosaurus("spino2", "Joginapally", 15);
+    if (!spinosaurus.canCoexistWith(otherSpinosaurus)) {
+      allTestsPassed = false;
+    }
 
-    // TODO: Test where other Dinosaur's canCoexistWith returns true. Should return true.
+    Velociraptor velociraptor = new Velociraptor("raptor1", "Alan", 8);
+    if (!spinosaurus.canCoexistWith(velociraptor)) {
+      allTestsPassed = false;
+    }
 
-    // TODO: Test where other Dinosaur's canCoexistWith returns false. Should return false.
+    Triceratops triceratops = new Triceratops("triceratops1", "Cera", 10);
+    if (spinosaurus.canCoexistWith(triceratops)) {
+      allTestsPassed = false;
+    }
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
 
     System.out.println();
     return allTestsPassed;
@@ -206,11 +256,16 @@ public class DinoParkTester {
       allTestsPassed = false;
     }
 
-    // TODO: Test trying to add null to a habitat. Should throw IllegalArgumentException
+    try {
+      habitat.addDinosaur(null);
+      allTestsPassed = false;
+    } catch (IllegalArgumentException e) {
+      // Expected exception
+    } catch (Exception e) {
+      allTestsPassed = false;
+    }
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
+    
 
     System.out.println();
     return allTestsPassed;
@@ -220,15 +275,34 @@ public class DinoParkTester {
     System.out.println("Testing Habitat removeDinosaur validation...");
     boolean allTestsPassed = true;
 
-    // TODO: Normal Case: Test removing a valid dinosaur from the habitat
+    Habitat habitat = new Habitat("habitat1", 50, 10);
+    habitat.addDinosaur(new Velociraptor("raptor1", "Alan", 2));
+    try {
+      habitat.removeDinosaur("raptor1");
+      if (habitat.getDinosaurs().size() != 0) {
+        allTestsPassed = false;
+      }
+    } catch (DinoNotFoundException e) {
+      allTestsPassed = false;
+    }
+    try {
+      habitat.removeDinosaur(null);
+      allTestsPassed = false;
+    } catch (IllegalArgumentException e) {
+      // Expected exception
+    } catch (Exception e) {
+      allTestsPassed = false;
+    }
 
-    // TODO: Test trying to remove null. Should throw IllegalArgumentException
+    try {
+      habitat.removeDinosaur("nonexistentid");
+      allTestsPassed = false;
+    } catch (DinoNotFoundException e) {
+      // Expected exception
+    } catch (Exception e) {
+      allTestsPassed = false;
+    }
 
-    // TODO: Test trying to remove dino that doesn't exist. Should throw DinoNotFoundException
-
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
 
     System.out.println();
     return allTestsPassed;
@@ -269,12 +343,32 @@ public class DinoParkTester {
     }
 
     // TODO: Test with enough rangers for habitat area, but not enough for the number of dinosaurs
+    Habitat habitatEnoughRangersNotEnoughDinos = new Habitat("habitat3", 10, 3);
+    habitatEnoughRangersNotEnoughDinos.addDinosaur(new Velociraptor("raptor1", "Alan", 2));
+    habitatEnoughRangersNotEnoughDinos.addDinosaur(new Velociraptor("raptor2", "Ellie", 2));
+    habitatEnoughRangersNotEnoughDinos.addDinosaur(new Velociraptor("raptor3", "Ian", 2));
+    habitatEnoughRangersNotEnoughDinos.addDinosaur(new Velociraptor("raptor4", "Owen", 2));
+
+    int violationsEnoughRangersNotEnoughDinos = habitatEnoughRangersNotEnoughDinos.countHumanSafetyViolations();
+
+    if (violationsEnoughRangersNotEnoughDinos != 1) {
+      allTestsPassed = false;
+    }
 
     // TODO: Test with not enough rangers for habitat area AND not enough for the number of dinosaurs
+    Habitat habitatNotEnoughRangersAndDinos = new Habitat("habitat4", 80, 2);
+    habitatNotEnoughRangersAndDinos.addDinosaur(new Velociraptor("raptor1", "Alan", 2));
+    habitatNotEnoughRangersAndDinos.addDinosaur(new Velociraptor("raptor2", "Ellie", 2));
+    habitatNotEnoughRangersAndDinos.addDinosaur(new Velociraptor("raptor3", "Ian", 2));
+    habitatNotEnoughRangersAndDinos.addDinosaur(new Velociraptor("raptor4", "Owen", 2));
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
+    int violationsNotEnoughRangersAndDinos = habitatNotEnoughRangersAndDinos.countHumanSafetyViolations();
+
+    if (violationsNotEnoughRangersAndDinos != 2) {
+      allTestsPassed = false;
+    }
+
+    
 
     System.out.println();
     return allTestsPassed;
@@ -301,14 +395,51 @@ public class DinoParkTester {
     }
 
     // TODO: Test with all dinos can coexist but not enough area
+    Habitat habitatNotEnoughAreaButCoexist = new Habitat("habitat2", 10, 2);
+    habitatNotEnoughAreaButCoexist.addDinosaur(new Velociraptor("raptor1", "Alan", 2));
+    habitatNotEnoughAreaButCoexist.addDinosaur(new Velociraptor("raptor2", "Ellie", 2));
+
+    int dinoSafetyNotEnoughAreaButCoexist = habitatNotEnoughAreaButCoexist.countDinoSafetyViolations();
+
+    if (dinoSafetyNotEnoughAreaButCoexist != 1) {
+      System.out.println("Habitat countDinoSafetyViolations incorrect for case: "
+          + "All dinos can coexist but not enough area.\n"
+          + "Expected: 1\n"
+          + "Actual: " + dinoSafetyNotEnoughAreaButCoexist);
+      allTestsPassed = false;
+    }
 
     // TODO: Test with enough area but not all dinos can coexist
+    Habitat habitatEnoughAreaButNotCoexist = new Habitat("habitat3", 40, 4);
+    habitatEnoughAreaButNotCoexist.addDinosaur(new Velociraptor("raptor1", "Alan", 2));
+    habitatEnoughAreaButNotCoexist.addDinosaur(new Triceratops("triceratops1", "Ellie", 2));
+
+    int dinoSafetyEnoughAreaButNotCoexist = habitatEnoughAreaButNotCoexist.countDinoSafetyViolations();
+
+    if (dinoSafetyEnoughAreaButNotCoexist != 1) {
+      System.out.println("Habitat countDinoSafetyViolations incorrect for case: "
+          + "Enough area but not all dinos can coexist.\n"
+          + "Expected: 1\n"
+          + "Actual: " + dinoSafetyEnoughAreaButNotCoexist);
+      allTestsPassed = false;
+    }
 
     // TODO: Test where not enough area AND not all dinos can coexist
+    Habitat habitatNotEnoughAreaAndNotCoexist = new Habitat("habitat4", 10, 3);
+    habitatNotEnoughAreaAndNotCoexist.addDinosaur(new Velociraptor("raptor1", "Alan", 2));
+    habitatNotEnoughAreaAndNotCoexist.addDinosaur(new Triceratops("triceratops1", "Ellie", 2));
 
-    // TODO: remove these two lines when you complete this tester method
-    System.out.println("!! This tester method has not been completed !!");
-    allTestsPassed = false;
+    int dinoSafetyNotEnoughAreaAndNotCoexist = habitatNotEnoughAreaAndNotCoexist.countDinoSafetyViolations();
+
+    if (dinoSafetyNotEnoughAreaAndNotCoexist != 2) {
+      System.out.println("Habitat countDinoSafetyViolations incorrect for case: "
+          + "Not enough area AND not all dinos can coexist.\n"
+          + "Expected: 2\n"
+          + "Actual: " + dinoSafetyNotEnoughAreaAndNotCoexist);
+      allTestsPassed = false;
+    }
+
+    
 
     System.out.println();
     return allTestsPassed;

@@ -1,7 +1,7 @@
-public class Trex extends Dinosaur{
+public class TRex extends Dinosaur{
     
 
-    public Trex(String id, String name, int age) {
+    public TRex(String id, String name, int age) {
         super(id, name, age, FoodType.MEAT, 20);
     }
 

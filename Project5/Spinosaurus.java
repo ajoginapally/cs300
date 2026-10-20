@@ -14,6 +14,9 @@ public class Spinosaurus extends Dinosaur {
         if (otherDinosaur == this) {
             return true;
         }
+        if (otherDinosaur instanceof Spinosaurus) {
+            return true;
+        }
         return otherDinosaur.canCoexistWith(this);
     }
 }
