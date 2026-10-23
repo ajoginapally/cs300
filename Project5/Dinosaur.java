@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 /**
  * Represents the base abstract definition of a Dinosaur within the management system.
  *
@@ -26,13 +34,13 @@ public abstract class Dinosaur {
    * @param name The name of the dinosaur; must not be null or blank.
    * @param age The age of the dinosaur in years; must be 0 or greater.
    * @param foodType The dietary classification of the dinosaur.
-   * @param preferredArea The minimum required living space in square meters; must be greater than 0.
+   * @param preferredArea The minimum living space in square meters; must be greater than 0.
    * @throws IllegalArgumentException if id or name is null/blank,
    * if age is negative,
    * or if preferredArea is less than or equal to zero.
    */
   protected Dinosaur(String id, String name, int age, FoodType foodType, double preferredArea) {
-    
+    // Validate identity, age, and space requirements.
     if (id == null || id.isBlank()) {
       throw new IllegalArgumentException("ID cannot be null or blank");
     }
@@ -45,7 +53,8 @@ public abstract class Dinosaur {
     if (preferredArea <= 0) {
       throw new IllegalArgumentException("Preferred area must be greater than 0");
     }
-    
+
+    // Store the validated dinosaur attributes.
     this.id = id;
     this.name = name;
     this.age = age;
@@ -55,6 +64,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns the vocalization or roar of the specific dinosaur species.
+   *
    * @return A string representing the dinosaur's sound.
    */
   public abstract String roar();
@@ -72,6 +82,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns the unique identifier for this dinosaur.
+   *
    * @return The ID string.
    */
   public String getId() {
@@ -80,6 +91,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns the name given to this dinosaur.
+   *
    * @return The dinosaur's name.
    */
   public String getName() {
@@ -88,6 +100,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns the age of the dinosaur in years.
+   *
    * @return The age value.
    */
   public int getAge() {
@@ -96,6 +109,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns the dietary classification of this dinosaur.
+   *
    * @return The FoodType enum value.
    */
   public FoodType getFoodType() {
@@ -104,6 +118,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns the required minimum living space for this dinosaur.
+   *
    * @return The preferred area in square meters.
    */
   public double getPreferredArea() {
@@ -112,6 +127,7 @@ public abstract class Dinosaur {
 
   /**
    * Returns a string representation of the dinosaur, including its name, ID, and age.
+   *
    * @return A formatted string describing the dinosaur.
    */
   @Override

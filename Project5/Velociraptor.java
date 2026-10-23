@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 /**
  * Represents a Velociraptor, a highly intelligent and agile carnivorous dinosaur.
  *
@@ -8,7 +16,6 @@
  *
  */
 public class Velociraptor extends Dinosaur {
-
   /**
    * Constructs a new Velociraptor with the specified identity and age.
    *
@@ -18,6 +25,7 @@ public class Velociraptor extends Dinosaur {
    * @param id The unique identifier for this individual.
    * @param name The name given to this individual.
    * @param age The age of the dinosaur in years.
+   * @throws IllegalArgumentException if id or name is null or blank, or age is negative.
    */
   public Velociraptor(String id, String name, int age) {
     super(id, name, age, FoodType.MEAT, 8);
@@ -25,9 +33,11 @@ public class Velociraptor extends Dinosaur {
 
   /**
    * Returns the high-pitched, piercing vocalization of a Velociraptor.
+   *
    * @return The string "SKREEE! ME VEEEEEE!".
    */
-  @Override public String roar() {
+  @Override
+  public String roar() {
     return "SKREEE! ME VEEEEEE!";
   }
 
@@ -41,7 +51,8 @@ public class Velociraptor extends Dinosaur {
    * @param otherDinosaur The dinosaur to check compatibility against.
    * @return true if the other dinosaur is also a meat-eater; false otherwise.
    */
-  @Override public boolean canCoexistWith(Dinosaur otherDinosaur) {
+  @Override
+  public boolean canCoexistWith(Dinosaur otherDinosaur) {
     if (otherDinosaur == this) {
       return true;
     }

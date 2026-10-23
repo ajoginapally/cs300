@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 import java.util.ArrayList;
 
 /**
@@ -18,12 +26,14 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Constructs a new Habitat with the specified name, size, and staffing level.
+   *
    * @param name The name of the habitat; must not be null or blank.
    * @param area The total square footage/meters; must be greater than 0.
    * @param parkRangers The number of rangers assigned; must be non-negative.
    * @throws IllegalArgumentException if validation rules are violated.
    */
   public Habitat(String name, double area, int parkRangers) {
+    // Validate the habitat name, area, and ranger count.
     if (name == null || name.isBlank()) {
       throw new IllegalArgumentException("Habitat name cannot be null or blank.");
     }
@@ -33,6 +43,8 @@ public class Habitat implements SafetyCheckable {
     if (parkRangers < 0) {
       throw new IllegalArgumentException("Number of park rangers cannot be negative.");
     }
+
+    // Initialize the habitat with an empty resident list.
     this.name = name;
     this.area = area;
     this.parkRangers = parkRangers;
@@ -43,15 +55,16 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Retrieves the name of the habitat
+   *
    * @return The name of the habitat.
    */
   public String getName() {
-    
     return this.name;
   }
 
   /**
    * Retrieves the area of the habitat
+   *
    * @return The total area of the habitat.
    */
   public double getArea() {
@@ -60,6 +73,7 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Retrieves the number of park rangers in this habitat
+   *
    * @return The number of rangers assigned to this habitat.
    */
   public int getParkRangers() {
@@ -68,6 +82,7 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Returns a copy of the list of dinosaurs in this habitat.
+   *
    * @return A new ArrayList containing the resident dinosaurs.
    */
   public ArrayList<Dinosaur> getDinosaurs() {
@@ -76,10 +91,12 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Adds a dinosaur to this habitat.
+   *
    * @param dinosaur The dinosaur to add.
    * @throws IllegalArgumentException if the dinosaur is null.
    */
   public void addDinosaur(Dinosaur dinosaur) {
+    // Reject missing dinosaurs before adding a resident.
     if (dinosaur == null) {
       throw new IllegalArgumentException("Dinosaur cannot be null.");
     }
@@ -88,15 +105,19 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Removes a dinosaur from the habitat by its unique ID.
+   *
    * @param dinoId The ID of the dinosaur to remove.
    * @return The removed Dinosaur.
    * @throws IllegalArgumentException if dinoId is null or blank.
    * @throws DinoNotFoundException if no dinosaur with that ID exists in this habitat.
    */
   public Dinosaur removeDinosaur(String dinoId) throws DinoNotFoundException {
+    // Validate the identifier before searching the residents.
     if (dinoId == null || dinoId.isBlank()) {
       throw new IllegalArgumentException("Dinosaur ID cannot be null or blank.");
     }
+
+    // Find and remove the resident with the requested identifier.
     for (int i = 0; i < this.dinosaurs.size(); i++) {
       if (this.dinosaurs.get(i).getId().equals(dinoId)) {
         return this.dinosaurs.remove(i);
@@ -117,9 +138,13 @@ public class Habitat implements SafetyCheckable {
   @Override
   public int countHumanSafetyViolations() {
     int violations = 0;
+
+    // Check whether the rangers can cover the habitat area.
     if (this.area > this.parkRangers * 10) {
       violations++;
     }
+
+    // Check whether every dinosaur has a ranger.
     if (this.dinosaurs.size() > this.parkRangers) {
       violations++;
     }
@@ -138,17 +163,21 @@ public class Habitat implements SafetyCheckable {
   @Override
   public int countDinoSafetyViolations() {
     int violations = 0;
-    
+
+    // Total the space required by all resident dinosaurs.
     int totalAreaRequired = 0;
     for (Dinosaur dinosaur : this.dinosaurs) {
       totalAreaRequired += dinosaur.getPreferredArea();
     }
+
+    // Count a violation when the habitat has insufficient space.
     if (totalAreaRequired > this.area) {
       violations++;
     }
-    // TODO: Check if any resident is incompatible with any
-    // other resident using the canCoexistWith() method.
+
+    // Check each distinct pair of dinosaurs for compatibility.
     for (int i = 0; i < this.dinosaurs.size(); i++) {
+      // Compare this dinosaur with each later resident.
       for (int j = i + 1; j < this.dinosaurs.size(); j++) {
         Dinosaur dino1 = this.dinosaurs.get(i);
         Dinosaur dino2 = this.dinosaurs.get(j);
@@ -163,16 +192,19 @@ public class Habitat implements SafetyCheckable {
 
   /**
    * Returns a detailed string representing the habitat and all its residents.
+   *
    * @return A formatted multi-line string.
    */
   @Override
   public String toString() {
+    // Start the description with the habitat details.
     StringBuilder habitatString = new StringBuilder(String.format(
         "Habitat: %s, area=%f m^2, parkRangers=%d\n",
         this.name,
         this.area,
-        this.parkRangers
-    ));
+        this.parkRangers));
+
+    // Append a description of each resident dinosaur.
     for (Dinosaur dinosaur : this.dinosaurs) {
       habitatString.append(String.format("%s\n", dinosaur.toString()));
     }

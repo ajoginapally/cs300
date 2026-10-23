@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 /**
  * Represents a Brachiosaurus, a large herbivorous sauropod.
  *
@@ -7,7 +15,6 @@
  *
  */
 public class Brachiosaurus extends Dinosaur {
-
   /**
    * Constructs a new Brachiosaurus with the specified identity and age.
    * This constructor invokes the superclass constructor with default values
@@ -17,6 +24,7 @@ public class Brachiosaurus extends Dinosaur {
    * @param id   The unique identifier for this individual.
    * @param name The name given to this individual.
    * @param age  The age of the dinosaur in years.
+   * @throws IllegalArgumentException if id or name is null or blank, or age is negative.
    */
   public Brachiosaurus(String id, String name, int age) {
     super(id, name, age, FoodType.PLANTS, 12);
@@ -24,9 +32,11 @@ public class Brachiosaurus extends Dinosaur {
 
   /**
    * Returns the characteristic vocalization of a Brachiosaurus.
+   *
    * @return The string "UUUUUUU!".
    */
-  @Override public String roar() {
+  @Override
+  public String roar() {
     return "UUUUUUU!";
   }
 
@@ -39,7 +49,8 @@ public class Brachiosaurus extends Dinosaur {
    * @param otherDinosaur The dinosaur to check compatibility against.
    * @return true in all cases.
    */
-  @Override public boolean canCoexistWith(Dinosaur otherDinosaur) {
+  @Override
+  public boolean canCoexistWith(Dinosaur otherDinosaur) {
     return true;
   }
 }

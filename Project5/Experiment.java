@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 /**
  * Represents a scientific experiment or research project within the facility.
  *
@@ -11,40 +19,43 @@ public class Experiment {
 
   /**
    * Constructs a new Experiment with the given details.
+   *
    * @param description A brief summary of the experiment's goals.
    * @param staff The number of staff members assigned to this project.
-   * @throws IllegalArgumentException if staff is < 1
+   * @throws IllegalArgumentException if staff is less than 1
    */
   public Experiment(String description, int staff) {
-    
+    // Validate the staff count before storing the experiment details.
     if (staff <= 0) {
       throw new IllegalArgumentException("Staff count must be at least 1");
     }
-    
+
+    // Store the experiment details.
     this.description = description;
     this.staff = staff;
   }
 
   /**
    * Retrieves the description of the experiment.
+   *
    * @return The description string.
    */
   public String getDescription() {
-    // TODO: Return the description field
     return description;
   }
 
   /**
    * Retrieves the total number of staff members assigned to the experiment.
+   *
    * @return The staff count.
    */
   public int getStaff() {
-    // TODO: Return the staff field
     return staff;
   }
 
   /**
    * Updates the description of the experiment.
+   *
    * @param description The new description to set.
    */
   public void setDescription(String description) {
@@ -53,7 +64,9 @@ public class Experiment {
 
   /**
    * Updates the number of staff members assigned to the experiment.
+   *
    * @param staff The new staff count to set.
+   * @throws IllegalArgumentException if staff is less than 1.
    */
   public void setStaff(int staff) {
     if (staff <= 0) {
@@ -65,6 +78,7 @@ public class Experiment {
   /**
    * Returns a string representation of the experiment,
    * including its description and staff count.
+   *
    * @return A formatted string describing the experiment.
    */
   @Override

@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 /**
  * Exception thrown when a specific dinosaur cannot be located within the park system.
  *
@@ -7,7 +15,6 @@
  *
  */
 public class DinoNotFoundException extends Exception {
-
   /**
    * Constructs a new DinoNotFoundException with an error message.
    *

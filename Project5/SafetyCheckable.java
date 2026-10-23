@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 /**
  * Defines a contract for entities within the park that must undergo regular safety audits.
  *
@@ -7,15 +15,16 @@
  *
  */
 public interface SafetyCheckable {
-
   /**
    * Performs an audit of the risks posed to park staff and visitors.
+   *
    * @return The total number of detected human safety violations.
    */
   int countHumanSafetyViolations();
 
   /**
    * Performs an audit of the risks posed to the dinosaurs' well-being.
+   *
    * @return The total number of detected dinosaur safety violations.
    */
   int countDinoSafetyViolations();

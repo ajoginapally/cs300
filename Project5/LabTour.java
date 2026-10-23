@@ -1,3 +1,11 @@
+/*
+ * Author: Arnav Joginapally
+ * Email: joginapally@wisc.edu
+ * Course: CS 300, Fall 2026
+ * Assignment: Dino Park, Program 5
+ * Citations: none
+ */
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +18,6 @@ import java.util.ArrayList;
  *
  */
 public class LabTour implements SafetyCheckable {
-
   /**
    * The maximum number of individuals (staff and visitors combined)
    * allowed in the lab at any single time for safety reasons.
@@ -28,6 +35,7 @@ public class LabTour implements SafetyCheckable {
    * @param visitors The number of tourists currently on the tour.
    */
   public LabTour(String name, int visitors) {
+    // Initialize the tour with no active experiments.
     this.name = name;
     this.visitors = visitors;
     this.activeExperiments = new ArrayList<>();
@@ -62,7 +70,7 @@ public class LabTour implements SafetyCheckable {
    */
   @Override
   public int countHumanSafetyViolations() {
-    
+    // Combine visitors and experiment staff to check capacity.
     int totalHumans = this.visitors;
     for (Experiment experiment : this.activeExperiments) {
       totalHumans += experiment.getStaff();
@@ -91,9 +99,11 @@ public class LabTour implements SafetyCheckable {
    */
   @Override
   public String toString() {
+    // Start the description with the tour details.
     StringBuilder labTourString = new StringBuilder(
-        String.format("Lab Tour: %s, visitors=%d\n", this.name, this.visitors)
-    );
+        String.format("Lab Tour: %s, visitors=%d\n", this.name, this.visitors));
+
+    // Append a description of each active experiment.
     for (Experiment experiment : this.activeExperiments) {
       labTourString.append(String.format("%s\n", experiment.toString()));
     }
